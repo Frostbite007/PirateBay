@@ -41,7 +41,7 @@ public class Hud {
 		countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-		levelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+		levelLabel = new Label("Pirate Ship", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		stageLabel = new Label("STAGE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		lifeLabel = new Label("LIFE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		
