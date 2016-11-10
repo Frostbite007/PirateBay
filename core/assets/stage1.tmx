@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="203" height="15" tilewidth="32" tileheight="32" nextobjectid="345">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="203" height="15" tilewidth="32" tileheight="32" nextobjectid="350">
  <tileset firstgid="1" name="SNES - Donkey Kong Country 2 Diddys Kong Quest - Pirate Panic" tilewidth="32" tileheight="32" spacing="2" margin="1" tilecount="3150" columns="210">
   <image source="SNES - Donkey Kong Country 2 Diddys Kong Quest - Pirate Panic.png" width="7168" height="512"/>
  </tileset>

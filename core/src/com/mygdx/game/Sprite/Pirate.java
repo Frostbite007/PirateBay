@@ -13,15 +13,17 @@ import com.mygdx.game.PirateBay;
 import com.mygdx.game.Screens.PlayScreen;
 
 public class Pirate extends Sprite {
-	public enum State { FALLING, JUMPING, STANDING, RUNNING, ATTACKING};
+	public enum State { FALLING, JUMPING, STANDING, RUNNING, ATTACKING, DIE};
 	public State currentState;
 	public State previousState;
 	public World world;
 	public Body b2body;
 	private TextureRegion pirateStand;
+	private Animation pirateStandFix;
 	private Animation pirateRun;
 	private Animation pirateJump;
 	private Animation pirateAttack;
+	private Animation pirateDie;
 	private float stateTimer;
 	private boolean runningRight;
 	
@@ -33,8 +35,8 @@ public class Pirate extends Sprite {
 	private int[] pirateAttackHeight = {78, 75, 76, 85, 64, 68};
 	private int[] pirateJumpWidth = {77, 77, 75, 75, 68};
 	private int[] pirateJumpHeight = {92, 93, 91, 91, 68};
-	private int[] pirateDieWidth = {52, 53, 75, 68};
-	private int[] pirateDieHeight = {81, 81, 88, 68};
+	private int[] pirateDieWidth = {52, 53, 75, 68, 78, 88};
+	private int[] pirateDieHeight = {81, 81, 88, 68, 44, 30};
 
 	private int run = 0;
 	private int attack = 0;
@@ -43,6 +45,7 @@ public class Pirate extends Sprite {
 	private int die = 0;
 	
 	public boolean attacking = false;
+	public boolean dying = false;
 	
 	public Pirate(World world, PlayScreen screen) {
 		super(screen.getAtlas().findRegion("pirate"));
@@ -73,9 +76,23 @@ public class Pirate extends Sprite {
 		}
 		pirateAttack = new Animation(0.1f, frames);
 		frames.clear();
+		
+		for(int i = 0;i < 4 ; i++) {
+			frames.add(new TextureRegion(getTexture(), 1241 + stand, 0, pirateStandWidth[i], pirateStandHeight[i]));
+			run += pirateStandWidth[i];
+		}
+		pirateStandFix = new Animation(0.1f, frames);
+		frames.clear();
+		
+		for(int i = 0;i < 6 ; i++) {
+			frames.add(new TextureRegion(getTexture(), 458 + die, 0, pirateDieWidth[i], pirateDieHeight[i]));
+			die += pirateDieWidth[i];
+		}
+		pirateDie = new Animation(0.1f, frames);
+		frames.clear();
 			
 				
-		pirateStand = new TextureRegion(getTexture(), 1241 + pirateStandWidth[0], 0, pirateStandWidth[1], pirateRunHeight[1]);
+		pirateStand = new TextureRegion(getTexture(),  1241+pirateStandWidth[0], 0, pirateStandWidth[0], pirateRunHeight[0]);
 		
 		definePirate();
 		setBounds(0, 0, pirateStandWidth[0] / PirateBay.PPM,  pirateStandHeight[0] / PirateBay.PPM);
@@ -99,9 +116,13 @@ public class Pirate extends Sprite {
 				region = pirateRun.getKeyFrame(stateTimer, true);
 				break;
 			case ATTACKING:
-				region = pirateAttack.getKeyFrame(stateTimer, true);
+				region = pirateAttack.getKeyFrame(stateTimer);
+				attacking = false;
+				break;
 			case FALLING:
 			case STANDING:
+				region = pirateStandFix.getKeyFrame(stateTimer, true);
+				break;
 			default:
 				region = pirateStand;
 				break;
@@ -128,9 +149,11 @@ public class Pirate extends Sprite {
 		} else if (b2body.getLinearVelocity().x != 0) {
 			return State.RUNNING;
 		}  else if (attacking) {
-			attacking = false;
 			return State.ATTACKING;
-		} else {
+		}  else if (dying) {
+			return State.DIE;
+		} 
+		else {
 			return State.STANDING;
 		}
 	}
