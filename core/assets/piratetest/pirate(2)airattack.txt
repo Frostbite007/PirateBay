@@ -1,0 +1,26 @@
+pirate(2)airattack.png
+size: 111, 45
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+airat1
+  rotate: false
+  xy: 0, 0
+  size: 42, 41
+  orig: 42, 41
+  offset: 0, 0
+  index: -1
+airat2
+  rotate: false
+  xy: 42, 0
+  size: 34, 37
+  orig: 34, 37
+  offset: 0, 0
+  index: -1
+airat3
+  rotate: false
+  xy: 76, 0
+  size: 35, 45
+  orig: 35, 45
+  offset: 0, 0
+  index: -1

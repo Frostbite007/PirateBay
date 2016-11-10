@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -23,9 +24,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.PirateBay;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sprite.Pirate;
+import com.mygdx.game.Tools.B2WorldCreator;
 
 public class PlayScreen implements Screen{
 	private PirateBay game;
+	private TextureAtlas atlas;
+	
 	private OrthographicCamera gamecam;
 	private Viewport gamePort;
 	private Hud hud;
@@ -40,33 +44,27 @@ public class PlayScreen implements Screen{
 	private Pirate pirate;
 	
 	public PlayScreen(PirateBay game){
+		atlas = new TextureAtlas("piratebay.txt");
 		this.game = game;
+		
 		gamecam = new OrthographicCamera();
 		gamePort = new FitViewport(PirateBay.V_WIDTH / PirateBay.PPM, PirateBay.V_HEIGHT / PirateBay.PPM, gamecam);
 		hud = new Hud(game.batch);
+		
 		maploader = new TmxMapLoader();
 		map = maploader.load("stage1.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map, 1 / PirateBay.PPM);
 		gamecam.position.set(gamePort.getScreenWidth() / 2 , gamePort.getWorldHeight()/2, 0);
+		
 		world = new World(new Vector2(0, -20), true);
 		b2dr = new Box2DDebugRenderer();
-		pirate = new Pirate(world);
+		pirate = new Pirate(world, this);
 		
-		BodyDef bdef = new BodyDef();
-		PolygonShape shape = new PolygonShape();
-		FixtureDef fdef = new FixtureDef();
-		Body body;
-		
-		for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
-			Rectangle rect = ((RectangleMapObject) object).getRectangle();
-			bdef.type = BodyDef.BodyType.StaticBody;
-			bdef.position.set((rect.getX() + rect.getWidth() / 2) / PirateBay.PPM, (rect.getY() + rect.getHeight() / 2) / PirateBay.PPM);
-			body = world.createBody(bdef);
-			
-			shape.setAsBox(rect.getWidth() / 2 / PirateBay.PPM, rect.getHeight() / 2 / PirateBay.PPM);
-			fdef.shape = shape;
-			body.createFixture(fdef);
-		}
+		new B2WorldCreator(world, map);
+	}
+	
+	public TextureAtlas getAtlas() {
+		return atlas;
 	}
 	
 	@Override
@@ -84,12 +82,17 @@ public class PlayScreen implements Screen{
 		if (Gdx.input.isKeyPressed(Keys.LEFT) && pirate.b2body.getLinearVelocity().x >= -3) {
 			pirate.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), pirate.b2body.getWorldCenter(), true);
 		}
+		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+			pirate.attacking = true;
+		}
 	}
 	
 	public void update(float dt) {
 		handleInput(dt);
 		
 		world.step(1/60f, 6, 2);
+		
+		pirate.update(dt);
 		
 		gamecam.position.x = pirate.b2body.getPosition().x;
 		
@@ -106,6 +109,11 @@ public class PlayScreen implements Screen{
 		
 		renderer.render();
 		b2dr.render(world, gamecam.combined);
+		
+		game.batch.setProjectionMatrix(gamecam.combined);
+		game.batch.begin();
+		pirate.draw(game.batch);
+		game.batch.end();
 		
 		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 		hud.stage.draw();
@@ -137,7 +145,11 @@ public class PlayScreen implements Screen{
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		map.dispose();
+		renderer.dispose();
+		world.dispose();
+		b2dr.dispose();
+		hud.dispose();
 		
 	}
 

@@ -1,0 +1,26 @@
+pirate(2)stand.png
+size: 108, 44
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+stand1
+  rotate: false
+  xy: 0, 0
+  size: 36, 44
+  orig: 36, 44
+  offset: 0, 0
+  index: -1
+stand2
+  rotate: false
+  xy: 36, 0
+  size: 36, 43
+  orig: 36, 43
+  offset: 0, 0
+  index: -1
+stand3
+  rotate: false
+  xy: 72, 0
+  size: 36, 41
+  orig: 36, 41
+  offset: 0, 0
+  index: -1

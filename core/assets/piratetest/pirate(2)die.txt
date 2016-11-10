@@ -1,0 +1,19 @@
+pirate(2)die.png
+size: 45, 56
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+die1
+  rotate: false
+  xy: 0, 0
+  size: 44, 41
+  orig: 44, 41
+  offset: 0, 0
+  index: -1
+die2
+  rotate: false
+  xy: 0, 41
+  size: 45, 15
+  orig: 45, 15
+  offset: 0, 0
+  index: -1

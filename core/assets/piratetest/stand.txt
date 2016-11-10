@@ -1,0 +1,33 @@
+stand.png
+size: 263, 79
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+stand1
+  rotate: false
+  xy: 0, 0
+  size: 66, 79
+  orig: 66, 79
+  offset: 0, 0
+  index: -1
+stand2
+  rotate: false
+  xy: 66, 0
+  size: 66, 79
+  orig: 66, 79
+  offset: 0, 0
+  index: -1
+stand3
+  rotate: false
+  xy: 132, 0
+  size: 66, 78
+  orig: 66, 78
+  offset: 0, 0
+  index: -1
+stand4
+  rotate: false
+  xy: 198, 0
+  size: 65, 77
+  orig: 65, 77
+  offset: 0, 0
+  index: -1

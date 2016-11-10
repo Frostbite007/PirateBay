@@ -1,0 +1,47 @@
+pirate(2)attack.png
+size: 250, 47
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+at1
+  rotate: false
+  xy: 0, 0
+  size: 41, 39
+  orig: 41, 39
+  offset: 0, 0
+  index: -1
+at2
+  rotate: false
+  xy: 41, 0
+  size: 47, 47
+  orig: 47, 47
+  offset: 0, 0
+  index: -1
+at3
+  rotate: false
+  xy: 88, 0
+  size: 51, 47
+  orig: 51, 47
+  offset: 0, 0
+  index: -1
+at4
+  rotate: false
+  xy: 139, 0
+  size: 42, 41
+  orig: 42, 41
+  offset: 0, 0
+  index: -1
+at5
+  rotate: false
+  xy: 181, 0
+  size: 34, 37
+  orig: 34, 37
+  offset: 0, 0
+  index: -1
+at6
+  rotate: false
+  xy: 215, 0
+  size: 35, 45
+  orig: 35, 45
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,40 @@
+pirate2.png
+size: 724, 56
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+pirate(2)airattack
+  rotate: false
+  xy: 0, 0
+  size: 111, 45
+  orig: 111, 45
+  offset: 0, 0
+  index: -1
+pirate(2)attack
+  rotate: false
+  xy: 111, 0
+  size: 250, 47
+  orig: 250, 47
+  offset: 0, 0
+  index: -1
+pirate(2)die
+  rotate: false
+  xy: 361, 0
+  size: 45, 56
+  orig: 45, 56
+  offset: 0, 0
+  index: -1
+pirate(2)stand
+  rotate: false
+  xy: 406, 0
+  size: 108, 44
+  orig: 108, 44
+  offset: 0, 0
+  index: -1
+pirate(2)walk
+  rotate: false
+  xy: 514, 0
+  size: 210, 45
+  orig: 210, 45
+  offset: 0, 0
+  index: -1

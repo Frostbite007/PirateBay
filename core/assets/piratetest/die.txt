@@ -1,0 +1,47 @@
+die.png
+size: 411, 88
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+die1
+  rotate: false
+  xy: 0, 0
+  size: 52, 81
+  orig: 52, 81
+  offset: 0, 0
+  index: -1
+die2
+  rotate: false
+  xy: 52, 0
+  size: 53, 81
+  orig: 53, 81
+  offset: 0, 0
+  index: -1
+die3
+  rotate: false
+  xy: 105, 0
+  size: 72, 88
+  orig: 72, 88
+  offset: 0, 0
+  index: -1
+die4
+  rotate: false
+  xy: 177, 0
+  size: 68, 68
+  orig: 68, 68
+  offset: 0, 0
+  index: -1
+die5
+  rotate: false
+  xy: 245, 0
+  size: 78, 44
+  orig: 78, 44
+  offset: 0, 0
+  index: -1
+die6
+  rotate: false
+  xy: 323, 0
+  size: 88, 30
+  orig: 88, 30
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,33 @@
+pirate1.png
+size: 726, 56
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+pirate(1)attack
+  rotate: false
+  xy: 0, 0
+  size: 363, 46
+  orig: 363, 46
+  offset: 0, 0
+  index: -1
+pirate(1)die
+  rotate: false
+  xy: 363, 0
+  size: 45, 56
+  orig: 45, 56
+  offset: 0, 0
+  index: -1
+pirate(1)stand
+  rotate: false
+  xy: 408, 0
+  size: 108, 44
+  orig: 108, 44
+  offset: 0, 0
+  index: -1
+pirate(1)walk
+  rotate: false
+  xy: 516, 0
+  size: 210, 45
+  orig: 210, 45
+  offset: 0, 0
+  index: -1
