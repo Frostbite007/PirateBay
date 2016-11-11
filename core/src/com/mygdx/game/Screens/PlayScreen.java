@@ -6,18 +6,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -43,7 +36,7 @@ public class PlayScreen implements Screen{
 	
 	private Pirate pirate;
 	
-	public PlayScreen(PirateBay game){
+	public PlayScreen(PirateBay game) {
 		atlas = new TextureAtlas("piratebay.txt");
 		this.game = game;
 		
@@ -58,9 +51,10 @@ public class PlayScreen implements Screen{
 		
 		world = new World(new Vector2(0, -20), true);
 		b2dr = new Box2DDebugRenderer();
-		pirate = new Pirate(world, this);
 		
 		new B2WorldCreator(world, map);
+		
+		pirate = new Pirate(world, this);
 	}
 	
 	public TextureAtlas getAtlas() {

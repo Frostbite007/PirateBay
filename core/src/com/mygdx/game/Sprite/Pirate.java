@@ -119,6 +119,8 @@ public class Pirate extends Sprite {
 				region = pirateAttack.getKeyFrame(stateTimer);
 				attacking = false;
 				break;
+			case DIE:
+				region = pirateDie.getKeyFrame(stateTimer);
 			case FALLING:
 			case STANDING:
 				region = pirateStandFix.getKeyFrame(stateTimer, true);
