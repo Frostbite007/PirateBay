@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.PirateBay;
+import com.mygdx.game.Scenes.Hud;
 
 
 public class Coins extends InteractiveTileObject {
@@ -19,13 +20,15 @@ public class Coins extends InteractiveTileObject {
 		Gdx.app.log("Coins", "Collision");
 		setCategoryFilter(PirateBay.DESTROYED_BIT);
 		getCell().setTile(null);
+		Hud.addScore(100);
 	}
 
 	@Override
-	public void onBodyHit() {
+	public void onFrontHit() {
 		Gdx.app.log("Coins", "Collision");
 		setCategoryFilter(PirateBay.DESTROYED_BIT);
 		getCell().setTile(null);
+		Hud.addScore(100);
 	}
 
 	@Override
@@ -33,7 +36,15 @@ public class Coins extends InteractiveTileObject {
 		Gdx.app.log("Coins", "Collision");
 		setCategoryFilter(PirateBay.DESTROYED_BIT);
 		getCell().setTile(null);
-		
+		Hud.addScore(100);
+	}
+
+	@Override
+	public void onBackHit() {
+		Gdx.app.log("Coins", "Collision");
+		setCategoryFilter(PirateBay.DESTROYED_BIT);
+		getCell().setTile(null);
+		Hud.addScore(100);
 	}
 
 }

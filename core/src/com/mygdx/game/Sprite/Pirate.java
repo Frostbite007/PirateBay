@@ -184,19 +184,26 @@ public class Pirate extends Sprite {
 		
 		b2body.createFixture(fdef).setUserData("head");
 		
-		EdgeShape body = new EdgeShape();
-		body.set(new Vector2(33 / PirateBay.PPM, -30 / PirateBay.PPM), new Vector2(33 / PirateBay.PPM, 30 / PirateBay.PPM));
-		fdef.shape = body;
+		EdgeShape front = new EdgeShape();
+		front.set(new Vector2(33 / PirateBay.PPM, -30 / PirateBay.PPM), new Vector2(33 / PirateBay.PPM, 30 / PirateBay.PPM));
+		fdef.shape = front;
 		fdef.isSensor = true;
 		
-		b2body.createFixture(fdef).setUserData("body");
+		b2body.createFixture(fdef).setUserData("front");
 		
 		EdgeShape bottom = new EdgeShape();
-		bottom.set(new Vector2(-26 / PirateBay.PPM, -33 / PirateBay.PPM), new Vector2(26 / PirateBay.PPM, -33 / PirateBay.PPM));
+		bottom.set(new Vector2(-30 / PirateBay.PPM, -33 / PirateBay.PPM), new Vector2(30 / PirateBay.PPM, -33 / PirateBay.PPM));
 		fdef.shape = bottom;
 		fdef.isSensor = true;
 		
 		b2body.createFixture(fdef).setUserData("body");
+		
+		EdgeShape back = new EdgeShape();
+		back.set(new Vector2(-33 / PirateBay.PPM, -30 / PirateBay.PPM), new Vector2(-33 / PirateBay.PPM, 30 / PirateBay.PPM));
+		fdef.shape = back;
+		fdef.isSensor = true;
+		
+		b2body.createFixture(fdef).setUserData("back");
 		
 	}
 

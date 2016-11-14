@@ -23,12 +23,12 @@ public class WorldContactListener implements ContactListener{
 			}
 		}
 		
-		if(fixA.getUserData() == "body" || fixB.getUserData() == "body") {
-			Fixture head = fixA.getUserData() == "body" ? fixA : fixB;
+		if(fixA.getUserData() == "front" || fixB.getUserData() == "front") {
+			Fixture head = fixA.getUserData() == "front" ? fixA : fixB;
 			Fixture object = head == fixA ? fixB : fixA;
 			
 			if(object.getUserData() != null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())) {
-				((InteractiveTileObject) object.getUserData()).onBodyHit();
+				((InteractiveTileObject) object.getUserData()).onFrontHit();
 			}
 		}
 		
@@ -37,7 +37,16 @@ public class WorldContactListener implements ContactListener{
 			Fixture object = head == fixA ? fixB : fixA;
 			
 			if(object.getUserData() != null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())) {
-				((InteractiveTileObject) object.getUserData()).onBodyHit();
+				((InteractiveTileObject) object.getUserData()).onBottomHit();
+			}
+		}
+		
+		if(fixA.getUserData() == "back" || fixB.getUserData() == "back") {
+			Fixture head = fixA.getUserData() == "back" ? fixA : fixB;
+			Fixture object = head == fixA ? fixB : fixA;
+			
+			if(object.getUserData() != null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())) {
+				((InteractiveTileObject) object.getUserData()).onBackHit();
 			}
 		}
 	}
