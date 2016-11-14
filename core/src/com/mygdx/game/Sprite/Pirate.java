@@ -3,9 +3,11 @@ package com.mygdx.game.Sprite;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -168,10 +170,34 @@ public class Pirate extends Sprite {
 		
 		FixtureDef fdef = new FixtureDef();
 		CircleShape shape = new CircleShape();
-		shape.setRadius(35 / PirateBay.PPM);
+		shape.setRadius(30 / PirateBay.PPM);
+		fdef.filter.categoryBits = PirateBay.PIRATE_BIT;
+		fdef.filter.maskBits = PirateBay.DEFAULT_BIT | PirateBay.COINS_BIT;
 		
 		fdef.shape = shape;
 		b2body.createFixture(fdef);
+		
+		EdgeShape head = new EdgeShape();
+		head.set(new Vector2(-15 / PirateBay.PPM, 33 / PirateBay.PPM), new Vector2(15 / PirateBay.PPM, 33 / PirateBay.PPM));
+		fdef.shape = head;
+		fdef.isSensor = true;
+		
+		b2body.createFixture(fdef).setUserData("head");
+		
+		EdgeShape body = new EdgeShape();
+		body.set(new Vector2(33 / PirateBay.PPM, -30 / PirateBay.PPM), new Vector2(33 / PirateBay.PPM, 30 / PirateBay.PPM));
+		fdef.shape = body;
+		fdef.isSensor = true;
+		
+		b2body.createFixture(fdef).setUserData("body");
+		
+		EdgeShape bottom = new EdgeShape();
+		bottom.set(new Vector2(-26 / PirateBay.PPM, -33 / PirateBay.PPM), new Vector2(26 / PirateBay.PPM, -33 / PirateBay.PPM));
+		fdef.shape = bottom;
+		fdef.isSensor = true;
+		
+		b2body.createFixture(fdef).setUserData("body");
+		
 	}
 
 }

@@ -9,6 +9,11 @@ public class PirateBay extends Game {
 	public static final int V_WIDTH = 500;
 	public static final int V_HEIGHT = 400;
 	public static final float PPM = 100;
+
+	public static final short DEFAULT_BIT = 3;
+	public static final short PIRATE_BIT = 2;
+	public static final short COINS_BIT = 1;
+	public static final short DESTROYED_BIT = 8;
 	
 	public SpriteBatch batch;
 	

@@ -5,7 +5,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
-//import com.mygdx.game.Sprite.Coins;
+import com.mygdx.game.Sprite.Coins;
 import com.mygdx.game.Sprite.Floor;
 
 public class B2WorldCreator {
@@ -16,10 +16,10 @@ public class B2WorldCreator {
 			new Floor(world, map, rect);
 		}
 		
-		/*for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
+		for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
 			Rectangle rect = ((RectangleMapObject) object).getRectangle();
 			
 			new Coins(world, map, rect);
-		}*/
+		}
 	}
 }

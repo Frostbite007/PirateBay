@@ -18,6 +18,7 @@ import com.mygdx.game.PirateBay;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sprite.Pirate;
 import com.mygdx.game.Tools.B2WorldCreator;
+import com.mygdx.game.Tools.WorldContactListener;
 
 public class PlayScreen implements Screen{
 	private PirateBay game;
@@ -55,6 +56,8 @@ public class PlayScreen implements Screen{
 		new B2WorldCreator(world, map);
 		
 		pirate = new Pirate(world, this);
+		
+		world.setContactListener(new WorldContactListener());
 	}
 	
 	public TextureAtlas getAtlas() {
