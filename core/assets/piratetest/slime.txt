@@ -1,0 +1,47 @@
+slime.png
+size: 314, 24
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+enwalk1
+  rotate: false
+  xy: 0, 0
+  size: 64, 15
+  orig: 64, 15
+  offset: 0, 0
+  index: -1
+enwalk2
+  rotate: false
+  xy: 64, 0
+  size: 58, 18
+  orig: 58, 18
+  offset: 0, 0
+  index: -1
+enwalk3
+  rotate: false
+  xy: 122, 0
+  size: 48, 24
+  orig: 48, 24
+  offset: 0, 0
+  index: -1
+enwalk4
+  rotate: false
+  xy: 170, 0
+  size: 48, 24
+  orig: 48, 24
+  offset: 0, 0
+  index: -1
+enwalk5
+  rotate: false
+  xy: 218, 0
+  size: 48, 21
+  orig: 48, 21
+  offset: 0, 0
+  index: -1
+enwalk6
+  rotate: false
+  xy: 266, 0
+  size: 48, 18
+  orig: 48, 18
+  offset: 0, 0
+  index: -1

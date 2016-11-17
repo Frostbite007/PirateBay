@@ -49,9 +49,9 @@ public class Pirate extends Sprite {
 	public boolean attacking = false;
 	public boolean dying = false;
 	
-	public Pirate(World world, PlayScreen screen) {
+	public Pirate(PlayScreen screen) {
 		super(screen.getAtlas().findRegion("pirate"));
-		this.world = world;
+		this.world = screen.getWorld();
 		currentState = State.STANDING;
 		previousState = State.STANDING;
 		stateTimer = 0;
@@ -172,7 +172,10 @@ public class Pirate extends Sprite {
 		CircleShape shape = new CircleShape();
 		shape.setRadius(30 / PirateBay.PPM);
 		fdef.filter.categoryBits = PirateBay.PIRATE_BIT;
-		fdef.filter.maskBits = PirateBay.DEFAULT_BIT | PirateBay.COINS_BIT;
+		fdef.filter.maskBits = PirateBay.GROUND_BIT | 
+				PirateBay.COINS_BIT |
+				PirateBay.FLOOR_BIT |
+				PirateBay.ENEMY_BIT;
 		
 		fdef.shape = shape;
 		b2body.createFixture(fdef);
@@ -192,11 +195,11 @@ public class Pirate extends Sprite {
 		b2body.createFixture(fdef).setUserData("front");
 		
 		EdgeShape bottom = new EdgeShape();
-		bottom.set(new Vector2(-30 / PirateBay.PPM, -33 / PirateBay.PPM), new Vector2(30 / PirateBay.PPM, -33 / PirateBay.PPM));
+		bottom.set(new Vector2(-15 / PirateBay.PPM, -33 / PirateBay.PPM), new Vector2(15 / PirateBay.PPM, -33 / PirateBay.PPM));
 		fdef.shape = bottom;
 		fdef.isSensor = true;
 		
-		b2body.createFixture(fdef).setUserData("body");
+		b2body.createFixture(fdef).setUserData("bottom");
 		
 		EdgeShape back = new EdgeShape();
 		back.set(new Vector2(-33 / PirateBay.PPM, -30 / PirateBay.PPM), new Vector2(-33 / PirateBay.PPM, 30 / PirateBay.PPM));

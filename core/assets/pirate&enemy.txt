@@ -1,0 +1,19 @@
+pirate&enemy.png
+size: 1892, 117
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+pirate
+  rotate: false
+  xy: 0, 0
+  size: 1892, 93
+  orig: 1892, 93
+  offset: 0, 0
+  index: -1
+slime
+  rotate: false
+  xy: 0, 93
+  size: 314, 24
+  orig: 314, 24
+  offset: 0, 0
+  index: -1

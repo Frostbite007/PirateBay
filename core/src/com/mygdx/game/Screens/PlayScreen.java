@@ -3,6 +3,8 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -17,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.PirateBay;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sprite.Pirate;
+import com.mygdx.game.Sprite.Slime;
 import com.mygdx.game.Tools.B2WorldCreator;
 import com.mygdx.game.Tools.WorldContactListener;
 
@@ -36,9 +39,12 @@ public class PlayScreen implements Screen{
 	private Box2DDebugRenderer b2dr;
 	
 	private Pirate pirate;
+	private Slime slime;
+	
+	private Music music;
 	
 	public PlayScreen(PirateBay game) {
-		atlas = new TextureAtlas("piratebay.txt");
+		atlas = new TextureAtlas("pirate&enemy.txt");
 		this.game = game;
 		
 		gamecam = new OrthographicCamera();
@@ -53,11 +59,18 @@ public class PlayScreen implements Screen{
 		world = new World(new Vector2(0, -20), true);
 		b2dr = new Box2DDebugRenderer();
 		
-		new B2WorldCreator(world, map);
+		new B2WorldCreator(this);
 		
-		pirate = new Pirate(world, this);
+		pirate = new Pirate(this);
+		
 		
 		world.setContactListener(new WorldContactListener());
+		
+		music = PirateBay.manager.get("audio/pirategamemusic.mp3", Music.class);
+		music.setLooping(true);
+		music.play();
+		
+		slime = new Slime(this, .32f, .32f);
 	}
 	
 	public TextureAtlas getAtlas() {
@@ -71,6 +84,7 @@ public class PlayScreen implements Screen{
 	
 	public void handleInput(float dt) {
 		if (Gdx.input.isKeyJustPressed(Keys.UP)) {
+			PirateBay.manager.get("audio/pirate_jump.mp3", Sound.class).play();
 			pirate.b2body.applyLinearImpulse(new Vector2(0 , 5f), pirate.b2body.getWorldCenter(), true);
 		}
 		if (Gdx.input.isKeyPressed(Keys.RIGHT) && pirate.b2body.getLinearVelocity().x <=3) {
@@ -90,6 +104,7 @@ public class PlayScreen implements Screen{
 		world.step(1/60f, 6, 2);
 		
 		pirate.update(dt);
+		//slime.update(dt);
 		hud.update(dt);
 		
 		gamecam.position.x = pirate.b2body.getPosition().x;
@@ -111,6 +126,7 @@ public class PlayScreen implements Screen{
 		game.batch.setProjectionMatrix(gamecam.combined);
 		game.batch.begin();
 		pirate.draw(game.batch);
+		//slime.draw(game.batch);
 		game.batch.end();
 		
 		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -121,6 +137,14 @@ public class PlayScreen implements Screen{
 	public void resize(int width, int height) {
 		gamePort.update(width, height);
 		
+	}
+	
+	public TiledMap getMap() {
+		return map;
+	}
+	
+	public World getWorld() {
+		return world;
 	}
 
 	@Override

@@ -1,0 +1,26 @@
+piratebay.png
+size: 1892, 149
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+pirate
+  rotate: false
+  xy: 0, 0
+  size: 1892, 93
+  orig: 1892, 93
+  offset: 0, 0
+  index: -1
+pirate1
+  rotate: false
+  xy: 0, 93
+  size: 726, 56
+  orig: 726, 56
+  offset: 0, 0
+  index: -1
+pirate2
+  rotate: false
+  xy: 726, 93
+  size: 724, 56
+  orig: 724, 56
+  offset: 0, 0
+  index: -1

@@ -1,16 +1,16 @@
 package com.mygdx.game.Sprite;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.PirateBay;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Screens.PlayScreen;
 
 
 public class Coins extends InteractiveTileObject {
-	public Coins(World world, TiledMap map, Rectangle bounds) {
-		super(world, map, bounds);
+	public Coins(PlayScreen screen, Rectangle bounds) {
+		super(screen, bounds);
 		fixture.setUserData(this);
 		setCategoryFilter(PirateBay.COINS_BIT);
 	}
@@ -18,6 +18,7 @@ public class Coins extends InteractiveTileObject {
 	@Override
 	public void onHeadHit() {
 		Gdx.app.log("Coins", "Collision");
+		PirateBay.manager.get("audio/coin.wav", Sound.class).play();
 		setCategoryFilter(PirateBay.DESTROYED_BIT);
 		getCell().setTile(null);
 		Hud.addScore(100);
@@ -26,6 +27,7 @@ public class Coins extends InteractiveTileObject {
 	@Override
 	public void onFrontHit() {
 		Gdx.app.log("Coins", "Collision");
+		PirateBay.manager.get("audio/coin.wav", Sound.class).play();
 		setCategoryFilter(PirateBay.DESTROYED_BIT);
 		getCell().setTile(null);
 		Hud.addScore(100);
@@ -34,6 +36,7 @@ public class Coins extends InteractiveTileObject {
 	@Override
 	public void onBottomHit() {
 		Gdx.app.log("Coins", "Collision");
+		PirateBay.manager.get("audio/coin.wav", Sound.class).play();
 		setCategoryFilter(PirateBay.DESTROYED_BIT);
 		getCell().setTile(null);
 		Hud.addScore(100);
@@ -42,6 +45,7 @@ public class Coins extends InteractiveTileObject {
 	@Override
 	public void onBackHit() {
 		Gdx.app.log("Coins", "Collision");
+		PirateBay.manager.get("audio/coin.wav", Sound.class).play();
 		setCategoryFilter(PirateBay.DESTROYED_BIT);
 		getCell().setTile(null);
 		Hud.addScore(100);

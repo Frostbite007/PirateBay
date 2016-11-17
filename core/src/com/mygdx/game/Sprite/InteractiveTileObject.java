@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.PirateBay;
+import com.mygdx.game.Screens.PlayScreen;
 
 public abstract class InteractiveTileObject {
 	protected World world;
@@ -22,9 +23,9 @@ public abstract class InteractiveTileObject {
 	
 	protected Fixture fixture;
 	
-	public InteractiveTileObject(World world, TiledMap map, Rectangle bounds) {
-		this.world = world;
-		this.map = map;
+	public InteractiveTileObject(PlayScreen screen, Rectangle bounds) {
+		this.world = screen.getWorld();
+		this.map = screen.getMap();
 		this.bounds = bounds;
 		
 		BodyDef bdef = new BodyDef();
@@ -37,7 +38,7 @@ public abstract class InteractiveTileObject {
 			
 		shape.setAsBox(bounds.getWidth() / 2 / PirateBay.PPM, bounds.getHeight() / 2 / PirateBay.PPM);
 		fdef.shape = shape;
-		 fixture = body.createFixture(fdef);
+		fixture = body.createFixture(fdef);
 	}
 	
 	public abstract void onHeadHit();
