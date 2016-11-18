@@ -106,6 +106,9 @@ public class PlayScreen implements Screen{
 		pirate.update(dt);
 		for(Enemy enemy : creator.getSlime()) {
 			enemy.update(dt);
+			if(enemy.getX() < pirate.getX() + 500 / PirateBay.PPM) {
+				enemy.b2body.setActive(true);
+			}
 		}
 		hud.update(dt);
 		
@@ -123,7 +126,7 @@ public class PlayScreen implements Screen{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		renderer.render();
-		b2dr.render(world, gamecam.combined);
+		//b2dr.render(world, gamecam.combined);
 		
 		game.batch.setProjectionMatrix(gamecam.combined);
 		game.batch.begin();

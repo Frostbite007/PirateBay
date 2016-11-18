@@ -28,7 +28,7 @@ public class Hud implements Disposable{
 	private Label lifeLabel;
 	
 	public Hud(SpriteBatch sb){
-		worldTimer = 300;
+		worldTimer = 120;
 		timeCount = 0;
 		score = 0;
 		

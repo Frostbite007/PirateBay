@@ -15,7 +15,7 @@ import com.mygdx.game.PirateBay;
 import com.mygdx.game.Screens.PlayScreen;
 
 public class Pirate extends Sprite {
-	public enum State { FALLING, JUMPING, STANDING, RUNNING, ATTACKING, DIE};
+	public enum State { FALLING, JUMPING, STANDING, RUNNING, ATTACKING, DEAD};
 	public State currentState;
 	public State previousState;
 	public World world;
@@ -48,6 +48,7 @@ public class Pirate extends Sprite {
 	
 	public boolean attacking = false;
 	public boolean dying = false;
+	private boolean pirateIsDead;
 	
 	public Pirate(PlayScreen screen) {
 		super(screen.getAtlas().findRegion("pirate"));
@@ -121,7 +122,7 @@ public class Pirate extends Sprite {
 				region = pirateAttack.getKeyFrame(stateTimer);
 				attacking = false;
 				break;
-			case DIE:
+			case DEAD:
 				region = pirateDie.getKeyFrame(stateTimer);
 			case FALLING:
 			case STANDING:
@@ -146,7 +147,9 @@ public class Pirate extends Sprite {
 	}
 	
 	public State getState() {
-		if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING)) {
+		if(pirateIsDead) {
+			return State.DEAD;
+		} else if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING)) {
 			return State.JUMPING;
 		} else if (b2body.getLinearVelocity().y < 0) {
 			return State.FALLING;
@@ -155,7 +158,7 @@ public class Pirate extends Sprite {
 		}  else if (attacking) {
 			return State.ATTACKING;
 		}  else if (dying) {
-			return State.DIE;
+			return State.DEAD;
 		} 
 		else {
 			return State.STANDING;
@@ -211,5 +214,4 @@ public class Pirate extends Sprite {
 		b2body.createFixture(fdef).setUserData("back");
 		
 	}
-
 }
