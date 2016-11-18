@@ -174,8 +174,10 @@ public class Pirate extends Sprite {
 		fdef.filter.categoryBits = PirateBay.PIRATE_BIT;
 		fdef.filter.maskBits = PirateBay.GROUND_BIT | 
 				PirateBay.COINS_BIT |
+				PirateBay.STAIR_BIT |
 				PirateBay.FLOOR_BIT |
-				PirateBay.ENEMY_BIT;
+				PirateBay.ENEMY_BIT |
+				PirateBay.ENEMY_HEAD_BIT;
 		
 		fdef.shape = shape;
 		b2body.createFixture(fdef);

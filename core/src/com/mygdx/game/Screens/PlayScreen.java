@@ -18,8 +18,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.PirateBay;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Sprite.Enemy;
 import com.mygdx.game.Sprite.Pirate;
-import com.mygdx.game.Sprite.Slime;
 import com.mygdx.game.Tools.B2WorldCreator;
 import com.mygdx.game.Tools.WorldContactListener;
 
@@ -37,9 +37,9 @@ public class PlayScreen implements Screen{
 	
 	private World world;
 	private Box2DDebugRenderer b2dr;
+	private B2WorldCreator creator;
 	
 	private Pirate pirate;
-	private Slime slime;
 	
 	private Music music;
 	
@@ -59,7 +59,7 @@ public class PlayScreen implements Screen{
 		world = new World(new Vector2(0, -20), true);
 		b2dr = new Box2DDebugRenderer();
 		
-		new B2WorldCreator(this);
+		creator = new B2WorldCreator(this);
 		
 		pirate = new Pirate(this);
 		
@@ -70,7 +70,7 @@ public class PlayScreen implements Screen{
 		music.setLooping(true);
 		music.play();
 		
-		slime = new Slime(this, .32f, .32f);
+		
 	}
 	
 	public TextureAtlas getAtlas() {
@@ -88,10 +88,10 @@ public class PlayScreen implements Screen{
 			pirate.b2body.applyLinearImpulse(new Vector2(0 , 5f), pirate.b2body.getWorldCenter(), true);
 		}
 		if (Gdx.input.isKeyPressed(Keys.RIGHT) && pirate.b2body.getLinearVelocity().x <=3) {
-			pirate.b2body.applyLinearImpulse(new Vector2(0.1f, 0), pirate.b2body.getWorldCenter(), true);
+			pirate.b2body.applyLinearImpulse(new Vector2(0.7f, 0), pirate.b2body.getWorldCenter(), true);
 		}
 		if (Gdx.input.isKeyPressed(Keys.LEFT) && pirate.b2body.getLinearVelocity().x >= -3) {
-			pirate.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), pirate.b2body.getWorldCenter(), true);
+			pirate.b2body.applyLinearImpulse(new Vector2(-0.7f, 0), pirate.b2body.getWorldCenter(), true);
 		}
 		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
 			pirate.attacking = true;
@@ -104,7 +104,9 @@ public class PlayScreen implements Screen{
 		world.step(1/60f, 6, 2);
 		
 		pirate.update(dt);
-		//slime.update(dt);
+		for(Enemy enemy : creator.getSlime()) {
+			enemy.update(dt);
+		}
 		hud.update(dt);
 		
 		gamecam.position.x = pirate.b2body.getPosition().x;
@@ -126,7 +128,9 @@ public class PlayScreen implements Screen{
 		game.batch.setProjectionMatrix(gamecam.combined);
 		game.batch.begin();
 		pirate.draw(game.batch);
-		//slime.draw(game.batch);
+		for(Enemy enemy : creator.getSlime()) {
+			enemy.draw(game.batch);
+		}
 		game.batch.end();
 		
 		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -148,22 +152,13 @@ public class PlayScreen implements Screen{
 	}
 
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void pause() {}
 
 	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void resume() {}
 
 	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void hide() {}
 
 	@Override
 	public void dispose() {

@@ -17,9 +17,10 @@ public class PirateBay extends Game {
 	public static final short PIRATE_BIT = 2;
 	public static final short COINS_BIT = 4;
 	public static final short DESTROYED_BIT = 8;
-	public static final short FLOOR_BIT = 16;
-	public static final short ENEMY_BIT = 32;
-	public static final short ENEMY_HEAD_BIT = 64;
+	public static final short STAIR_BIT = 16;
+	public static final short FLOOR_BIT = 32;
+	public static final short ENEMY_BIT = 64;
+	public static final short ENEMY_HEAD_BIT = 128;
 	
 	
 	public SpriteBatch batch;
